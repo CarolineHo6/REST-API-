@@ -9,7 +9,10 @@ import {
 } from "../services/users.service.js";
 
 export const getAll = asyncHandler(async function (req, res) {
-    const docs = await getAllUsers();
+    const docs = await getAllUsers({
+        role: req.query.role,
+        city: req.query.city
+    });
     res.json(docs);
 });
 

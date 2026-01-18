@@ -5,8 +5,13 @@ function usersCollection() {
     return getCollection("users");
 }
 
-export async function getAllUsers() {
-    return usersCollection().find({}).toArray();
+export async function getAllUsers(filter = {}) {
+    const query = {};
+
+    if (filter.role) query.role = filter.role;
+    if (filter.city) query["address.city"] = filter.city;
+
+    return usersCollection().find(query).toArray();
 }
 
 export async function getUserByUserId(userId) {
